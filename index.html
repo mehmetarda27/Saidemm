@@ -9,14 +9,13 @@
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  width:100%;
   min-height:100vh;
   overflow:hidden;
   font-family:Arial, sans-serif;
   color:white;
   background:
-    radial-gradient(circle at 50% 100%, #123b7a 0%, transparent 35%),
-    linear-gradient(180deg,#08235a 0%,#071a42 45%,#04102b 100%);
+    radial-gradient(circle at 50% 110%, #1457b8 0%, transparent 35%),
+    linear-gradient(180deg,#0b2b68 0%,#071b46 45%,#03102c 100%);
 }
 
 canvas{
@@ -27,83 +26,189 @@ canvas{
   z-index:1;
 }
 
+.moon{
+  position:fixed;
+  top:7vh;
+  right:9vw;
+  width:82px;
+  height:82px;
+  border-radius:50%;
+  background:#fff6c9;
+  box-shadow:0 0 40px #fff6c9aa;
+  z-index:2;
+}
+
+.cloud{
+  position:fixed;
+  width:180px;
+  height:55px;
+  background:rgba(255,255,255,.13);
+  border-radius:999px;
+  filter:blur(.3px);
+  z-index:2;
+  animation:cloudMove 28s linear infinite;
+}
+
+.cloud::before,.cloud::after{
+  content:"";
+  position:absolute;
+  background:rgba(255,255,255,.13);
+  border-radius:50%;
+}
+
+.cloud::before{width:70px;height:70px;left:35px;top:-35px}
+.cloud::after{width:90px;height:90px;right:25px;top:-50px}
+
+.c1{top:18vh;left:-220px}
+.c2{top:32vh;left:-360px;animation-delay:10s;transform:scale(.75)}
+
+@keyframes cloudMove{
+  to{left:120vw}
+}
+
+.flash{
+  position:fixed;
+  inset:0;
+  background:white;
+  opacity:0;
+  z-index:4;
+  pointer-events:none;
+  animation:flash 1s ease forwards;
+  animation-delay:4.7s;
+}
+
+@keyframes flash{
+  0%,100%{opacity:0}
+  45%{opacity:.22}
+}
+
+.countdown{
+  position:fixed;
+  inset:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:clamp(70px,20vw,160px);
+  font-weight:900;
+  color:#fff2a8;
+  text-shadow:0 0 45px #fff2a8;
+  animation:hideCount 4.2s forwards;
+}
+
+.countdown span{
+  position:absolute;
+  opacity:0;
+  animation:count 1s ease forwards;
+}
+
+.countdown span:nth-child(1){animation-delay:.2s}
+.countdown span:nth-child(2){animation-delay:1.2s}
+.countdown span:nth-child(3){animation-delay:2.2s}
+
+@keyframes count{
+  0%{opacity:0;transform:scale(.4)}
+  40%{opacity:1;transform:scale(1.15)}
+  100%{opacity:0;transform:scale(.8)}
+}
+
+@keyframes hideCount{
+  to{visibility:hidden}
+}
+
 .content{
   position:relative;
-  z-index:5;
+  z-index:10;
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:22px;
+  padding:20px;
   opacity:0;
-  transform:translateY(25px) scale(.96);
-  animation:showText 2s ease forwards;
-  animation-delay:5.2s;
+  animation:showContent 1.7s ease forwards;
+  animation-delay:5.3s;
 }
 
-@keyframes showText{
-  to{
-    opacity:1;
-    transform:translateY(0) scale(1);
-  }
+@keyframes showContent{
+  to{opacity:1}
 }
 
 .box{
   width:100%;
-  max-width:760px;
-  padding:26px 20px;
-  border-radius:28px;
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.22);
-  backdrop-filter:blur(14px);
-  box-shadow:0 20px 80px rgba(0,0,0,.45);
+  max-width:780px;
+  padding:28px 18px;
+  border-radius:30px;
+  background:rgba(255,255,255,.11);
+  border:1px solid rgba(255,255,255,.25);
+  backdrop-filter:blur(16px);
+  box-shadow:0 25px 90px rgba(0,0,0,.45);
 }
 
 h1{
-  font-size:clamp(34px,10vw,78px);
+  font-size:clamp(38px,11vw,86px);
   line-height:1.05;
-  margin-bottom:14px;
-  background:linear-gradient(90deg,#ffffff,#b9ddff,#fff2a8);
+  margin-bottom:12px;
+  background:linear-gradient(90deg,#fff,#bce3ff,#fff2a8,#fff);
   -webkit-background-clip:text;
   color:transparent;
-  text-shadow:0 0 35px rgba(160,210,255,.5);
+  text-shadow:0 0 40px #7db8ff99;
+  animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  to{filter:drop-shadow(0 0 22px #fff2a8)}
 }
 
 h2{
-  font-size:clamp(24px,7vw,48px);
+  font-size:clamp(25px,7vw,48px);
   color:#fff2a8;
   margin-bottom:20px;
-  text-shadow:0 0 25px rgba(255,242,168,.55);
 }
 
 p{
   font-size:clamp(16px,4.2vw,21px);
-  line-height:1.8;
+  line-height:1.75;
+  margin:13px 0;
   color:#eef7ff;
-  margin:12px 0;
+  opacity:0;
+  transform:translateY(18px);
+  animation:lineShow .9s ease forwards;
 }
+
+p:nth-of-type(1){animation-delay:6.1s}
+p:nth-of-type(2){animation-delay:6.7s}
+p:nth-of-type(3){animation-delay:7.3s}
+p:nth-of-type(4){animation-delay:7.9s}
+p:nth-of-type(5){animation-delay:8.5s}
 
 .gold{
   color:#fff2a8;
-  font-weight:bold;
+  font-weight:800;
 }
 
-.small{
-  margin-top:18px;
-  font-size:clamp(15px,3.8vw,19px);
+@keyframes lineShow{
+  to{opacity:1;transform:translateY(0)}
+}
+
+.tip{
+  position:fixed;
+  bottom:14px;
+  left:0;
+  right:0;
+  z-index:12;
+  text-align:center;
   color:#cde8ff;
+  font-size:14px;
+  opacity:.8;
+  animation:showContent 1s forwards;
+  animation-delay:6s;
 }
 
 @media(max-width:480px){
-  .box{
-    padding:24px 16px;
-    border-radius:24px;
-  }
-
-  p{
-    line-height:1.65;
-  }
+  .moon{width:58px;height:58px}
+  .box{padding:24px 15px;border-radius:25px}
+  p{line-height:1.62}
 }
 </style>
 </head>
@@ -112,149 +217,200 @@ p{
 
 <canvas id="scene"></canvas>
 
+<div class="moon"></div>
+<div class="cloud c1"></div>
+<div class="cloud c2"></div>
+<div class="flash"></div>
+
+<div class="countdown">
+  <span>3</span>
+  <span>2</span>
+  <span>1</span>
+</div>
+
 <div class="content">
   <div class="box">
     <h1>Saide’m</h1>
     <h2>Seni Çok Seviyorum 💙</h2>
 
-    <p>
-      İyi ki doğdun aşkım. Bugün gökyüzündeki bütün yıldızlar,
-      bütün ışıklar ve bütün güzellikler sadece senin için parlıyor.
-    </p>
+    <p>İyi ki doğdun aşkım. Bu gece gökyüzündeki bütün yıldızlar ve bütün ışıklar sadece senin için parlıyor.</p>
 
-    <p>
-      Sen benim hayatıma gelen en güzel mucizesin.
-      Gülüşün huzurum, sesin mutluluğum, varlığın kalbimin en değerli yeri.
-    </p>
+    <p>Sen benim hayatıma gelen en güzel mucizesin. Gülüşün huzurum, sesin mutluluğum, varlığın kalbimin en değerli yeri.</p>
 
-    <p class="gold">
-      Kalbinle, güzelliğinle, naifliğinle ve bana hissettirdiklerinle
-      benim için dünyadaki en özel insansın.
-    </p>
+    <p class="gold">Kalbinle, güzelliğinle, naifliğinle ve bana hissettirdiklerinle benim için dünyadaki en özel insansın.</p>
 
-    <p>
-      Yeni yaşında yüzün hep gülsün, kalbin hep huzurla dolsun.
-      Ben her zaman yanında olup seni mutlu etmek istiyorum.
-    </p>
+    <p>Yeni yaşında yüzün hep gülsün, kalbin hep huzurla dolsun. Ben her zaman yanında olup seni mutlu etmek istiyorum.</p>
 
-    <div class="small">
-      İyi ki varsın, iyi ki hayatımdasın, iyi ki benimlesin 💫
-    </div>
+    <p class="gold">İyi ki varsın, iyi ki hayatımdasın, iyi ki benimlesin. Nice güzel yaşlarına birlikte 💫</p>
   </div>
 </div>
+
+<div class="tip">Ekrana dokununca havai fişek patlar 🎆</div>
 
 <script>
 const canvas = document.getElementById("scene");
 const ctx = canvas.getContext("2d");
+let w,h;
 
-let w, h;
 function resize(){
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
+  w=canvas.width=window.innerWidth;
+  h=canvas.height=window.innerHeight;
 }
 resize();
-window.addEventListener("resize", resize);
+window.addEventListener("resize",resize);
 
-const stars = [];
-const shootingStars = [];
-const fireworks = [];
-const particles = [];
+const stars=[];
+const shoots=[];
+const particles=[];
+const rockets=[];
 
-for(let i=0;i<140;i++){
+for(let i=0;i<170;i++){
   stars.push({
     x:Math.random()*w,
     y:Math.random()*h,
     r:Math.random()*1.4+.3,
-    a:Math.random(),
-    speed:Math.random()*0.02+.005
+    a:Math.random()*Math.PI*2,
+    s:Math.random()*0.025+.008
   });
 }
 
-function addShootingStar(){
-  shootingStars.push({
-    x:-120,
-    y:Math.random()*h*.55+20,
-    len:Math.random()*90+90,
-    speed:Math.random()*7+8,
+function shootingStar(){
+  shoots.push({
+    x:-160,
+    y:Math.random()*h*.55+30,
+    len:Math.random()*110+90,
+    speed:Math.random()*7+9,
     alpha:1
   });
 }
 
-function createFirework(){
-  const x = Math.random()*w*.8+w*.1;
-  const y = Math.random()*h*.45+h*.08;
-  const colors = ["#fff2a8","#7dd3fc","#ff7ac8","#a78bfa","#ffffff","#8cffd2"];
+function rocket(){
+  rockets.push({
+    x:Math.random()*w*.8+w*.1,
+    y:h+20,
+    target:Math.random()*h*.42+h*.08,
+    vy:-(Math.random()*5+8),
+    color:pickColor()
+  });
+}
 
-  for(let i=0;i<70;i++){
-    const angle = Math.PI*2*i/70;
-    const speed = Math.random()*4+2;
+function pickColor(){
+  const c=["#fff2a8","#7dd3fc","#ff7ac8","#a78bfa","#ffffff","#8cffd2","#ffd166"];
+  return c[Math.floor(Math.random()*c.length)];
+}
+
+function explode(x,y,big=false){
+  const count=big?115:75;
+  for(let i=0;i<count;i++){
+    const angle=Math.PI*2*i/count;
+    const speed=Math.random()*(big?6:4.5)+2;
     particles.push({
       x,y,
       vx:Math.cos(angle)*speed,
       vy:Math.sin(angle)*speed,
-      life:100,
-      color:colors[Math.floor(Math.random()*colors.length)]
+      life:110,
+      max:110,
+      color:pickColor(),
+      size:Math.random()*2.4+1.4
     });
   }
 }
 
-setTimeout(()=>addShootingStar(),500);
-setTimeout(()=>addShootingStar(),1400);
-setTimeout(()=>addShootingStar(),2300);
-setTimeout(()=>createFirework(),1800);
-setTimeout(()=>createFirework(),2500);
-setTimeout(()=>createFirework(),3200);
-setTimeout(()=>createFirework(),3900);
-setTimeout(()=>createFirework(),4700);
+setTimeout(shootingStar,500);
+setTimeout(shootingStar,1300);
+setTimeout(shootingStar,2200);
 
-setInterval(addShootingStar,4200);
-setInterval(createFirework,1600);
+setTimeout(()=>explode(w*.5,h*.28,true),3500);
+setTimeout(()=>explode(w*.25,h*.22,true),4100);
+setTimeout(()=>explode(w*.75,h*.24,true),4700);
+
+setInterval(shootingStar,3600);
+setInterval(rocket,850);
+
+window.addEventListener("click",e=>{
+  explode(e.clientX,e.clientY,true);
+});
+
+window.addEventListener("touchstart",e=>{
+  const t=e.touches[0];
+  explode(t.clientX,t.clientY,true);
+},{passive:true});
 
 function draw(){
   ctx.clearRect(0,0,w,h);
 
   for(const s of stars){
-    s.a += s.speed;
-    const opacity = .35 + Math.sin(s.a)*.35;
+    s.a+=s.s;
+    const op=.35+Math.sin(s.a)*.35;
     ctx.beginPath();
     ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fillStyle = `rgba(255,255,255,${opacity})`;
+    ctx.fillStyle=`rgba(255,255,255,${op})`;
     ctx.fill();
   }
 
-  for(let i=shootingStars.length-1;i>=0;i--){
-    const s = shootingStars[i];
+  for(let i=shoots.length-1;i>=0;i--){
+    const s=shoots[i];
+    const grad=ctx.createLinearGradient(s.x,s.y,s.x-s.len,s.y+s.len*.35);
+    grad.addColorStop(0,`rgba(255,255,255,${s.alpha})`);
+    grad.addColorStop(1,"rgba(255,255,255,0)");
+    ctx.strokeStyle=grad;
+    ctx.lineWidth=2;
     ctx.beginPath();
     ctx.moveTo(s.x,s.y);
     ctx.lineTo(s.x-s.len,s.y+s.len*.35);
-    ctx.strokeStyle = `rgba(255,255,255,${s.alpha})`;
-    ctx.lineWidth = 2;
     ctx.stroke();
 
-    s.x += s.speed;
-    s.y -= s.speed*.35;
-    s.alpha -= .008;
+    s.x+=s.speed;
+    s.y-=s.speed*.35;
+    s.alpha-=.007;
+    if(s.x>w+250||s.alpha<=0)shoots.splice(i,1);
+  }
 
-    if(s.x>w+220 || s.alpha<=0) shootingStars.splice(i,1);
+  for(let i=rockets.length-1;i>=0;i--){
+    const r=rockets[i];
+    ctx.beginPath();
+    ctx.arc(r.x,r.y,3,0,Math.PI*2);
+    ctx.fillStyle=r.color;
+    ctx.shadowBlur=18;
+    ctx.shadowColor=r.color;
+    ctx.fill();
+    ctx.shadowBlur=0;
+
+    ctx.beginPath();
+    ctx.moveTo(r.x,r.y+10);
+    ctx.lineTo(r.x,r.y+42);
+    ctx.strokeStyle="rgba(255,255,255,.35)";
+    ctx.stroke();
+
+    r.y+=r.vy;
+    r.vy+=.05;
+
+    if(r.y<=r.target){
+      explode(r.x,r.y,true);
+      rockets.splice(i,1);
+    }
   }
 
   for(let i=particles.length-1;i>=0;i--){
-    const p = particles[i];
-    p.x += p.vx;
-    p.y += p.vy;
-    p.vy += .035;
-    p.vx *= .99;
-    p.vy *= .99;
+    const p=particles[i];
+    p.x+=p.vx;
+    p.y+=p.vy;
+    p.vy+=.045;
+    p.vx*=.985;
+    p.vy*=.985;
     p.life--;
 
+    ctx.globalAlpha=p.life/p.max;
     ctx.beginPath();
-    ctx.arc(p.x,p.y,2.2,0,Math.PI*2);
-    ctx.fillStyle = p.color;
-    ctx.globalAlpha = p.life/100;
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fillStyle=p.color;
+    ctx.shadowBlur=14;
+    ctx.shadowColor=p.color;
     ctx.fill();
-    ctx.globalAlpha = 1;
+    ctx.shadowBlur=0;
+    ctx.globalAlpha=1;
 
-    if(p.life<=0) particles.splice(i,1);
+    if(p.life<=0)particles.splice(i,1);
   }
 
   requestAnimationFrame(draw);

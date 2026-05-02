@@ -1,211 +1,135 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>İyi ki Doğdun Saidem 💙</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
+  width:100%;
   min-height:100vh;
   overflow:hidden;
-  font-family:"Segoe UI",Arial,sans-serif;
+  font-family:Arial, sans-serif;
   color:white;
   background:
-    radial-gradient(circle at 50% 105%,#1d6bff44,transparent 35%),
-    radial-gradient(circle at 20% 20%,#477cff33,transparent 28%),
-    radial-gradient(circle at 80% 15%,#a855f733,transparent 30%),
-    linear-gradient(180deg,#071b46,#08142f,#020817);
+    radial-gradient(circle at 50% 100%, #123b7a 0%, transparent 35%),
+    linear-gradient(180deg,#08235a 0%,#071a42 45%,#04102b 100%);
 }
 
-.sky{
+canvas{
   position:fixed;
   inset:0;
-  background-image:radial-gradient(#ffffff 1px,transparent 1px);
-  background-size:42px 42px;
-  opacity:.22;
-  animation:moveSky 25s linear infinite;
+  width:100%;
+  height:100%;
+  z-index:1;
 }
 
-@keyframes moveSky{
-  to{background-position:300px 500px}
-}
-
-.shooting{
-  position:fixed;
-  width:170px;
-  height:2px;
-  background:linear-gradient(90deg,#fff,transparent);
-  left:-220px;
-  transform:rotate(-22deg);
-  animation:shoot 4.5s linear infinite;
-  opacity:.9;
-}
-
-.shooting:nth-child(2){top:22%;animation-delay:1s}
-.shooting:nth-child(3){top:45%;animation-delay:2.7s}
-.shooting:nth-child(4){top:68%;animation-delay:4s}
-
-@keyframes shoot{
-  0%{left:-220px;opacity:0}
-  10%{opacity:1}
-  100%{left:125vw;opacity:0}
-}
-
-.center{
+.content{
   position:relative;
-  z-index:10;
+  z-index:5;
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  flex-direction:column;
   text-align:center;
-  padding:24px;
+  padding:22px;
+  opacity:0;
+  transform:translateY(25px) scale(.96);
+  animation:showText 2s ease forwards;
+  animation-delay:5.2s;
+}
+
+@keyframes showText{
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+.box{
+  width:100%;
+  max-width:760px;
+  padding:26px 20px;
+  border-radius:28px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.22);
+  backdrop-filter:blur(14px);
+  box-shadow:0 20px 80px rgba(0,0,0,.45);
 }
 
 h1{
-  font-size:clamp(38px,9vw,92px);
+  font-size:clamp(34px,10vw,78px);
   line-height:1.05;
-  background:linear-gradient(90deg,#fff,#bfe3ff,#fff1a8,#fff);
+  margin-bottom:14px;
+  background:linear-gradient(90deg,#ffffff,#b9ddff,#fff2a8);
   -webkit-background-clip:text;
   color:transparent;
-  text-shadow:0 0 45px #7db8ff88;
-  animation:fadeUp 1.4s ease;
+  text-shadow:0 0 35px rgba(160,210,255,.5);
 }
 
-.big{
-  margin-top:18px;
-  font-size:clamp(24px,6vw,48px);
-  color:#fff1a8;
-  text-shadow:0 0 25px #fff1a888;
-  animation:pulse 1.8s infinite;
+h2{
+  font-size:clamp(24px,7vw,48px);
+  color:#fff2a8;
+  margin-bottom:20px;
+  text-shadow:0 0 25px rgba(255,242,168,.55);
 }
 
-@keyframes pulse{
-  50%{transform:scale(1.04)}
-}
-
-.card{
-  margin-top:34px;
-  max-width:850px;
-  padding:26px 24px;
-  border-radius:28px;
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.24);
-  backdrop-filter:blur(18px);
-  box-shadow:0 25px 90px #0009;
-  animation:fadeUp 1.8s ease;
-}
-
-.card p{
-  font-size:clamp(17px,3.8vw,22px);
-  line-height:1.85;
-  margin:12px 0;
+p{
+  font-size:clamp(16px,4.2vw,21px);
+  line-height:1.8;
   color:#eef7ff;
+  margin:12px 0;
 }
 
 .gold{
-  color:#fff1a8;
-  font-weight:800;
+  color:#fff2a8;
+  font-weight:bold;
 }
 
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(35px)}
-  to{opacity:1;transform:translateY(0)}
+.small{
+  margin-top:18px;
+  font-size:clamp(15px,3.8vw,19px);
+  color:#cde8ff;
 }
 
-.firework{
-  position:fixed;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  z-index:5;
-  animation:boom 1.7s ease-out infinite;
-}
-
-@keyframes boom{
-  0%{
-    box-shadow:0 0 #fff;
-    transform:scale(.1);
-    opacity:1;
+@media(max-width:480px){
+  .box{
+    padding:24px 16px;
+    border-radius:24px;
   }
-  100%{
-    box-shadow:
-    0 -95px #fff1a8,
-    67px -67px #ff6ec7,
-    95px 0 #73e8ff,
-    67px 67px #b9ff66,
-    0 95px #ffffff,
-    -67px 67px #ff9fda,
-    -95px 0 #9b8cff,
-    -67px -67px #ffd166,
-    35px -110px #ffffff,
-    -35px 110px #7dd3fc;
-    transform:scale(1.22);
-    opacity:0;
+
+  p{
+    line-height:1.65;
   }
-}
-
-.float{
-  position:fixed;
-  bottom:-40px;
-  z-index:6;
-  animation:rise linear forwards;
-  pointer-events:none;
-}
-
-@keyframes rise{
-  to{transform:translateY(-115vh) rotate(360deg);opacity:0}
-}
-
-.footer{
-  position:fixed;
-  bottom:18px;
-  z-index:12;
-  font-size:15px;
-  color:#bfe3ff;
-  opacity:.85;
 }
 </style>
 </head>
 
 <body>
 
-<div class="sky"></div>
+<canvas id="scene"></canvas>
 
-<div class="shooting" style="top:12%"></div>
-<div class="shooting"></div>
-<div class="shooting"></div>
-<div class="shooting"></div>
+<div class="content">
+  <div class="box">
+    <h1>Saide’m</h1>
+    <h2>Seni Çok Seviyorum 💙</h2>
 
-<div class="firework" style="top:18%;left:18%;animation-delay:.1s"></div>
-<div class="firework" style="top:25%;left:78%;animation-delay:.7s"></div>
-<div class="firework" style="top:55%;left:50%;animation-delay:1.2s"></div>
-<div class="firework" style="top:68%;left:82%;animation-delay:1.9s"></div>
-<div class="firework" style="top:38%;left:33%;animation-delay:2.5s"></div>
-
-<div class="center">
-  <h1>Saide’m Seni Çok Seviyorum</h1>
-  <div class="big">İyi ki Doğdun Aşkım 🎂💙</div>
-
-  <div class="card">
     <p>
-      Bugün gökyüzündeki bütün ışıklar senin için parlıyor.
-      Çünkü sen benim hayatıma gelen en güzel mucizesin.
+      İyi ki doğdun aşkım. Bugün gökyüzündeki bütün yıldızlar,
+      bütün ışıklar ve bütün güzellikler sadece senin için parlıyor.
     </p>
 
     <p>
-      Gülüşün içimi ısıtan en güzel şey,
-      sesin huzurum,
-      varlığın ise kalbimin en değerli yeri.
+      Sen benim hayatıma gelen en güzel mucizesin.
+      Gülüşün huzurum, sesin mutluluğum, varlığın kalbimin en değerli yeri.
     </p>
 
-    <p>
-      Sen sadece güzel değilsin Saide’m;
-      <span class="gold">kalbinle, sevginle, naifliğinle ve bana hissettirdiklerinle eşsizsin.</span>
+    <p class="gold">
+      Kalbinle, güzelliğinle, naifliğinle ve bana hissettirdiklerinle
+      benim için dünyadaki en özel insansın.
     </p>
 
     <p>
@@ -213,40 +137,130 @@ h1{
       Ben her zaman yanında olup seni mutlu etmek istiyorum.
     </p>
 
-    <p class="gold">
-      İyi ki varsın, iyi ki hayatımdasın, iyi ki benimlesin 💙✨
-    </p>
+    <div class="small">
+      İyi ki varsın, iyi ki hayatımdasın, iyi ki benimlesin 💫
+    </div>
   </div>
 </div>
 
-<div class="footer">Bu gece, bu yıldızlar ve bu havai fişekler sadece Saide için 💫</div>
-
 <script>
-const emojis = ["💙","✨","🎆","🎂","💖","🌙","⭐","💫"];
+const canvas = document.getElementById("scene");
+const ctx = canvas.getContext("2d");
 
-function floatingEmoji(){
-  const e = document.createElement("div");
-  e.className = "float";
-  e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
-  e.style.left = Math.random()*100 + "vw";
-  e.style.fontSize = (18 + Math.random()*28) + "px";
-  e.style.animationDuration = (5 + Math.random()*6) + "s";
-  document.body.appendChild(e);
-  setTimeout(()=>e.remove(),10000);
+let w, h;
+function resize(){
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+const stars = [];
+const shootingStars = [];
+const fireworks = [];
+const particles = [];
+
+for(let i=0;i<140;i++){
+  stars.push({
+    x:Math.random()*w,
+    y:Math.random()*h,
+    r:Math.random()*1.4+.3,
+    a:Math.random(),
+    speed:Math.random()*0.02+.005
+  });
 }
 
-setInterval(floatingEmoji,240);
-
-function randomFirework(){
-  const f = document.createElement("div");
-  f.className = "firework";
-  f.style.left = Math.random()*100 + "vw";
-  f.style.top = (10 + Math.random()*65) + "vh";
-  document.body.appendChild(f);
-  setTimeout(()=>f.remove(),1800);
+function addShootingStar(){
+  shootingStars.push({
+    x:-120,
+    y:Math.random()*h*.55+20,
+    len:Math.random()*90+90,
+    speed:Math.random()*7+8,
+    alpha:1
+  });
 }
 
-setInterval(randomFirework,520);
+function createFirework(){
+  const x = Math.random()*w*.8+w*.1;
+  const y = Math.random()*h*.45+h*.08;
+  const colors = ["#fff2a8","#7dd3fc","#ff7ac8","#a78bfa","#ffffff","#8cffd2"];
+
+  for(let i=0;i<70;i++){
+    const angle = Math.PI*2*i/70;
+    const speed = Math.random()*4+2;
+    particles.push({
+      x,y,
+      vx:Math.cos(angle)*speed,
+      vy:Math.sin(angle)*speed,
+      life:100,
+      color:colors[Math.floor(Math.random()*colors.length)]
+    });
+  }
+}
+
+setTimeout(()=>addShootingStar(),500);
+setTimeout(()=>addShootingStar(),1400);
+setTimeout(()=>addShootingStar(),2300);
+setTimeout(()=>createFirework(),1800);
+setTimeout(()=>createFirework(),2500);
+setTimeout(()=>createFirework(),3200);
+setTimeout(()=>createFirework(),3900);
+setTimeout(()=>createFirework(),4700);
+
+setInterval(addShootingStar,4200);
+setInterval(createFirework,1600);
+
+function draw(){
+  ctx.clearRect(0,0,w,h);
+
+  for(const s of stars){
+    s.a += s.speed;
+    const opacity = .35 + Math.sin(s.a)*.35;
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle = `rgba(255,255,255,${opacity})`;
+    ctx.fill();
+  }
+
+  for(let i=shootingStars.length-1;i>=0;i--){
+    const s = shootingStars[i];
+    ctx.beginPath();
+    ctx.moveTo(s.x,s.y);
+    ctx.lineTo(s.x-s.len,s.y+s.len*.35);
+    ctx.strokeStyle = `rgba(255,255,255,${s.alpha})`;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    s.x += s.speed;
+    s.y -= s.speed*.35;
+    s.alpha -= .008;
+
+    if(s.x>w+220 || s.alpha<=0) shootingStars.splice(i,1);
+  }
+
+  for(let i=particles.length-1;i>=0;i--){
+    const p = particles[i];
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += .035;
+    p.vx *= .99;
+    p.vy *= .99;
+    p.life--;
+
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,2.2,0,Math.PI*2);
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = p.life/100;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    if(p.life<=0) particles.splice(i,1);
+  }
+
+  requestAnimationFrame(draw);
+}
+
+draw();
 </script>
 
 </body>
